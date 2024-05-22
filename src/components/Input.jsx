@@ -24,7 +24,7 @@ const Input = () => {
 
   return (
     <>
-      <div className="h-[80vh] flex flex-col justify-center items-center w-full ">
+      <div className="h-[80vh] flex flex-col justify-center items-center w-full px-5">
         <div
           className={`h-[80vh] w-[95%] md:max-w-[50%] my-3 ${
             data ? "overflow-auto" : ""
