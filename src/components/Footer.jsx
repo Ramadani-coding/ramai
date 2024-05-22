@@ -7,7 +7,7 @@ const Footer = () => {
             RamAI
           </a>
         </u>{" "}
-        masih dalam tahap pengembangan
+        saat ini masih berada dalam versi beta.
       </p>
     </div>
   );
