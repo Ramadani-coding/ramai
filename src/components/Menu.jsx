@@ -39,6 +39,10 @@ function Menu() {
             <a href="https://instagram.com/ramma.dhanii" target="_blank">
               @ramma.dhanii
             </a>
+            <br />
+            <a href="https://linktr.ee/a.ramadani" target="_blank">
+              About
+            </a>
           </DrawerBody>
         </DrawerContent>
       </Drawer>
