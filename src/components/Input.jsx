@@ -1,4 +1,4 @@
-import { Avatar, Textarea, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, Textarea, Wrap, WrapItem, Spinner } from "@chakra-ui/react";
 import { useState } from "react";
 import Content from "./Content";
 import { requestToGroq } from "../utils/groq";
@@ -8,11 +8,14 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 const Input = () => {
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInput = async () => {
+    setIsLoading(true);
     const ai = await requestToGroq(inputValue);
     setData(ai);
     setInputValue("");
+    setIsLoading(false);
   };
 
   const handleChange = (event) => {
@@ -57,25 +60,31 @@ const Input = () => {
           <button
             onClick={handleInput}
             type="button"
-            disabled={!inputValue.trim()}
+            disabled={!inputValue.trim() || isLoading}
             className={`bg-[#D7D7D7] flex justify-center items-center w-20 p-2 rounded-lg text-[#F4F4F4] ${
-              inputValue.trim() ? "bg-black text-white hover:bg-[#272727]" : ""
+              inputValue.trim() && !isLoading
+                ? "bg-black text-white hover:bg-[#272727]"
+                : ""
             } transition-all`}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5 md:w-6 md:h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 12L3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
-              />
-            </svg>
+            {isLoading ? (
+              <Spinner size="sm" color="white" />
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5 md:w-6 md:h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 12L3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </div>
